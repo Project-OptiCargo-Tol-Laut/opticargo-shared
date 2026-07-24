@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opticargo-shared"
+version = "0.1.0"
+description = "Single source of truth untuk skema data platform OptiCargo AI"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0,<3.0",
+    "pydantic[email]>=2.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0"
+]
+lint = [
+    "ruff"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/opticargo_shared"]

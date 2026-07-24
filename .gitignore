@@ -1,0 +1,27 @@
+# Lingkungan Virtual 
+venv/
+env/
+.venv/
+
+# File Cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest dan Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribusi dan Build 
+dist/
+build/
+*.egg-info/
+
+# File Environment 
+.env
+.env.local
+
+# Konfigurasi IDE 
+.vscode/
+.idea/
