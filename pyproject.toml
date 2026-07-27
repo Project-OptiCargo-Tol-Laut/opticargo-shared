@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "opticargo-shared"
 version = "0.1.0"
 description = "Single source of truth untuk skema data platform OptiCargo AI"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "pydantic>=2.0,<3.0",
     "pydantic[email]>=2.0"

@@ -52,7 +52,7 @@ def test_ship_valid_instantiation():
 def test_ship_missing_required_field():
     """Test validasi gagal jika field wajib (seperti status) tidak diisi."""
     with pytest.raises(ValidationError):
-        Ship(
+        Ship(  # type: ignore
             id=uuid4(),
             name="KM Nusantara Jaya",
             imo_number="IMO9123456",

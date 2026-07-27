@@ -41,7 +41,7 @@ def test_error_response_valid():
 def test_error_response_missing_field():
     """Test validasi gagal jika error_code tidak diisi."""
     with pytest.raises(ValidationError):
-        ErrorResponse(
+        ErrorResponse(  # type: ignore
             message="Terjadi kesalahan",
             details=[]
         )

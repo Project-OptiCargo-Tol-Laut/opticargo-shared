@@ -33,7 +33,7 @@ def test_graph_analysis_input_valid():
 def test_graph_analysis_input_invalid():
     """Test validasi gagal jika origin_port_id tidak disuplai (wajib)."""
     with pytest.raises(ValidationError):
-        GraphAnalysisInput(
+        GraphAnalysisInput(  # type: ignore
             request_id=uuid4(),
             # origin_port_id hilang
         )
