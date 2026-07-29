@@ -1,0 +1,21 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-00000000000d",
+  "entity_type": "model",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "model.promoted",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:model.promoted",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "dataset_version": "2026.07",
+    "drift_detected_at": null,
+    "metrics": {},
+    "model_mode": "trained",
+    "model_name": "cargo-match",
+    "model_version": "1.0",
+    "promoted_at": "2026-07-29T10:00:00Z"
+  },
+  "producer": "opticargo-fixture-generator"
+}

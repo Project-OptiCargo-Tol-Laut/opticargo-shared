@@ -1,0 +1,19 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000007",
+  "entity_type": "payment",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "payment.created",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:payment.created",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "amount": "1000",
+    "booking_id": "00000000-0000-0000-0000-000000000003",
+    "external_reference": null,
+    "payment_id": "00000000-0000-0000-0000-000000000007",
+    "status": "pending"
+  },
+  "producer": "opticargo-fixture-generator"
+}

@@ -1,0 +1,8 @@
+{
+  "code": "VALIDATION_ERROR",
+  "details": {
+    "field": "booking_ref"
+  },
+  "message": "Invalid input",
+  "trace_id": "00000000-0000-0000-0000-000000000002"
+}

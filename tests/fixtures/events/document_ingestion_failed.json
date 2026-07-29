@@ -1,0 +1,20 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000008",
+  "entity_type": "document",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "document.ingestion_failed",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:document.ingestion_failed",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "chunk_count": 0,
+    "document_id": "00000000-0000-0000-0000-000000000008",
+    "error_code": "PARSER_ERROR",
+    "error_message": "Document structure is unsupported",
+    "indexed_at": null,
+    "status": "failed"
+  },
+  "producer": "opticargo-fixture-generator"
+}

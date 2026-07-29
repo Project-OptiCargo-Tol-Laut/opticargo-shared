@@ -1,0 +1,21 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-00000000000c",
+  "entity_type": "report",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "report.failed",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:report.failed",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "completed_at": null,
+    "error": "Generation failed",
+    "format": "xlsx",
+    "report_id": "00000000-0000-0000-0000-00000000000c",
+    "report_type": "voyage_utilization",
+    "requested_by": "00000000-0000-0000-0000-000000000006",
+    "status": "failed"
+  },
+  "producer": "opticargo-fixture-generator"
+}

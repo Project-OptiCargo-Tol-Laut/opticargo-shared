@@ -1,0 +1,20 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000003",
+  "entity_type": "booking",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "booking.created",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:booking.created",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "actor_id": null,
+    "booked_volume_ton": "5",
+    "booking_id": "00000000-0000-0000-0000-000000000003",
+    "cargo_listing_id": "00000000-0000-0000-0000-000000000005",
+    "status": "pending",
+    "voyage_id": "00000000-0000-0000-0000-000000000004"
+  },
+  "producer": "opticargo-fixture-generator"
+}

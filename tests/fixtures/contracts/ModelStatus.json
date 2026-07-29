@@ -1,0 +1,10 @@
+{
+  "dataset_version": null,
+  "fallback_available": true,
+  "healthy": true,
+  "metrics": {},
+  "model_mode": "heuristic",
+  "model_name": "cargo-match",
+  "model_version": null,
+  "trained_at": null
+}

@@ -1,0 +1,14 @@
+{
+  "arrival_date": "2026-07-31T10:00:00Z",
+  "created_at": "2026-07-29T10:00:00Z",
+  "departure_date": "2026-07-29T10:00:00Z",
+  "id": "00000000-0000-0000-0000-000000000004",
+  "remaining_capacity_ton": "75",
+  "route_id": "00000000-0000-0000-0000-00000000000f",
+  "ship_id": "00000000-0000-0000-0000-00000000000e",
+  "status": "scheduled",
+  "total_capacity_ton": "100",
+  "updated_at": "2026-07-29T10:00:00Z",
+  "used_capacity_ton": "25",
+  "waypoints": []
+}

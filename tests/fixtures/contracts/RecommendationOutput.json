@@ -1,0 +1,14 @@
+{
+  "abstained": true,
+  "abstention_reason": "No authoritative source retrieved",
+  "citations": [],
+  "confidence": "0.1",
+  "confidence_level": "low",
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "fallback_used": false,
+  "intent": "unknown",
+  "recommendations": [],
+  "summary": "Insufficient evidence",
+  "voyage_id": "00000000-0000-0000-0000-000000000004",
+  "warnings": []
+}

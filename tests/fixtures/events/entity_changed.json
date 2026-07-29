@@ -1,0 +1,25 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000003",
+  "entity_type": "entity",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "entity.changed",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:entity.changed",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "change_type": "updated",
+    "changed_fields": [
+      "status"
+    ],
+    "entity_id": "00000000-0000-0000-0000-000000000003",
+    "entity_type": "booking",
+    "entity_version": "1",
+    "lookup_hint": {
+      "booking_id": "00000000-0000-0000-0000-000000000003"
+    },
+    "snapshot": null
+  },
+  "producer": "opticargo-fixture-generator"
+}

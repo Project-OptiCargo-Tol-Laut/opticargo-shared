@@ -1,67 +1,49 @@
-import pytest
-from uuid import uuid4
-from datetime import datetime
+from datetime import UTC, datetime
 from decimal import Decimal
+from uuid import uuid4
+
+import pytest
 from pydantic import ValidationError
 
-from opticargo_shared.models.user import User
-from opticargo_shared.models.ship import Ship
-from opticargo_shared.enums import UserRole, ShipStatus
+from opticargo_shared.enums import AccountStatus, ShipStatus, UserRole
+from opticargo_shared.models import ShipRead, UserRead
 
-def test_user_valid_instantiation():
-    """Test instansiasi User dengan data yang valid."""
-    user = User(
+NOW = datetime.now(UTC)
+
+
+def test_user_read_is_safe_and_uses_final_role() -> None:
+    user = UserRead(
         id=uuid4(),
         username="operator_01",
         email="operator@opticargo.id",
         role=UserRole.operator,
-        created_at=datetime.now()
+        account_status=AccountStatus.active,
+        created_at=NOW,
+        updated_at=NOW,
     )
-    assert user.username == "operator_01"
-    assert user.role == UserRole.operator
-
-def test_user_invalid_email():
-    """Test validasi gagal jika email tidak sesuai format."""
+    assert user.role.value == "operator_kapal"
+    assert "password_hash" not in UserRead.model_json_schema()["properties"]
     with pytest.raises(ValidationError):
-        User(
-            id=uuid4(),
-            username="operator_01",
-            email="bukan-email-valid",
-            role=UserRole.operator,
-            created_at=datetime.now()
-        )
+        UserRead.model_validate({**user.model_dump(), "password_hash": "secret"})
 
-def test_ship_valid_instantiation():
-    """Test instansiasi Ship dengan data yang valid."""
-    ship = Ship(
-        id=uuid4(),
-        name="KM Nusantara Jaya",
-        imo_number="IMO9123456",
-        ship_type="General Cargo",
-        gross_tonnage=Decimal("5000.50"),
-        deadweight_tonnage=Decimal("7000.00"),
-        cargo_capacity_m3=Decimal("8500.00"),
-        operator_id=uuid4(),
-        flag="Indonesia",
-        status=ShipStatus.active,
-        created_at=datetime.now()
-    )
-    assert ship.name == "KM Nusantara Jaya"
-    assert ship.status == ShipStatus.active
 
-def test_ship_missing_required_field():
-    """Test validasi gagal jika field wajib (seperti status) tidak diisi."""
+def test_ship_validates_numbers_and_aware_time() -> None:
+    ship_data = {
+        "id": uuid4(),
+        "name": "KM Nusantara Jaya",
+        "imo_number": "IMO9123456",
+        "ship_type": "General Cargo",
+        "gross_tonnage": Decimal("5000.50"),
+        "deadweight_tonnage": Decimal("7000.00"),
+        "cargo_capacity_m3": Decimal("8500.00"),
+        "operator_id": uuid4(),
+        "flag": "Indonesia",
+        "status": ShipStatus.active,
+        "created_at": NOW,
+        "updated_at": NOW,
+    }
+    assert ShipRead(**ship_data).name == "KM Nusantara Jaya"
     with pytest.raises(ValidationError):
-        Ship(  # type: ignore
-            id=uuid4(),
-            name="KM Nusantara Jaya",
-            imo_number="IMO9123456",
-            ship_type="General Cargo",
-            gross_tonnage=Decimal("5000.50"),
-            deadweight_tonnage=Decimal("7000.00"),
-            cargo_capacity_m3=Decimal("8500.00"),
-            operator_id=uuid4(),
-            flag="Indonesia",
-            # status tidak diisi, seharusnya error
-            created_at=datetime.now()
-        )
+        ShipRead(**{**ship_data, "gross_tonnage": "NaN"})
+    with pytest.raises(ValidationError):
+        ShipRead(**{**ship_data, "created_at": datetime.now()})

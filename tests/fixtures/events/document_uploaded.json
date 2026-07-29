@@ -1,0 +1,20 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000008",
+  "entity_type": "document",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "document.uploaded",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:document.uploaded",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "checksum": "sha256:example",
+    "document_id": "00000000-0000-0000-0000-000000000008",
+    "document_version": "1",
+    "is_superseded": false,
+    "mime_type": "application/pdf",
+    "object_key": "documents/example.pdf"
+  },
+  "producer": "opticargo-fixture-generator"
+}

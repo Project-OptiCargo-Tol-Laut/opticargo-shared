@@ -1,47 +1,68 @@
+from datetime import UTC, datetime
+from uuid import uuid4
+
 import pytest
 from pydantic import ValidationError
-from opticargo_shared.api.pagination import PageParams, PaginatedResponse
-from opticargo_shared.api.errors import ErrorResponse, ErrorDetail
 
-def test_page_params_valid():
-    """Test instansiasi parameter paginasi."""
-    params = PageParams(page=2, page_size=50)
-    assert params.page == 2
-    assert params.page_size == 50
+from opticargo_shared.api import (
+    CursorMeta,
+    ErrorResponse,
+    ExportJob,
+    PageMeta,
+    PageParams,
+    PageResponse,
+)
+from opticargo_shared.enums import ExportFormat, ReportStatus
 
-def test_page_params_default():
-    """Test nilai default paginasi."""
-    params = PageParams()
-    assert params.page == 1
-    assert params.page_size == 20
 
-def test_paginated_response_valid():
-    """Test respons paginasi generik."""
-    # Menggunakan list of strings sebagai tipe generik (T)
-    response = PaginatedResponse[str](
-        items=["item1", "item2"],
-        total=100,
-        page=1,
-        page_size=20
+def test_page_and_cursor_contracts() -> None:
+    assert PageParams().page_size == 20
+    response = PageResponse[str](
+        items=["one"],
+        meta=PageMeta(page=1, page_size=20, total_items=1, total_pages=1),
     )
-    assert len(response.items) == 2
-    assert response.total == 100
-
-def test_error_response_valid():
-    """Test instansiasi error response API."""
-    detail = ErrorDetail(field="email", message="Format email tidak valid")
-    error = ErrorResponse(
-        error_code="VALIDATION_ERR",
-        message="Terjadi kesalahan validasi",
-        details=[detail]
-    )
-    assert error.error_code == "VALIDATION_ERR"
-    assert len(error.details) == 1
-
-def test_error_response_missing_field():
-    """Test validasi gagal jika error_code tidak diisi."""
+    assert response.meta.total_items == 1
+    assert CursorMeta(next_cursor=None, has_more=False).has_more is False
     with pytest.raises(ValidationError):
-        ErrorResponse(  # type: ignore
-            message="Terjadi kesalahan",
-            details=[]
+        PageParams(page_size=101)
+
+
+def test_error_uses_canonical_code_and_required_trace() -> None:
+    trace_id = uuid4()
+    error = ErrorResponse(
+        error_code="VALIDATION_ERROR",
+        message="Invalid input",
+        details={"field": "email"},
+        trace_id=trace_id,
+    )
+    assert error.code == "VALIDATION_ERROR"
+    assert error.error_code == error.code
+    assert "error_code" not in error.model_dump()
+    with pytest.raises(ValidationError):
+        ErrorResponse(code="INTERNAL_ERROR", message="Failure")
+
+
+def test_export_completed_requires_result_metadata() -> None:
+    now = datetime.now(UTC)
+    completed = ExportJob(
+        id=uuid4(),
+        report_type="utilization",
+        format=ExportFormat.xlsx,
+        status=ReportStatus.completed,
+        requested_by=uuid4(),
+        created_at=now,
+        completed_at=now,
+        download_url="https://signed.example/report",
+        expires_at=now,
+    )
+    assert completed.status == ReportStatus.completed
+    with pytest.raises(ValidationError, match="download_url"):
+        ExportJob(
+            id=uuid4(),
+            report_type="utilization",
+            format=ExportFormat.xlsx,
+            status=ReportStatus.completed,
+            requested_by=uuid4(),
+            created_at=now,
+            completed_at=now,
         )

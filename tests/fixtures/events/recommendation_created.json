@@ -1,0 +1,22 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-000000000009",
+  "entity_type": "recommendation",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "recommendation.created",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:recommendation.created",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "recipient_user_ids": [
+      "00000000-0000-0000-0000-000000000006"
+    ],
+    "recommendation_id": "00000000-0000-0000-0000-000000000009",
+    "score": "0.8",
+    "status": "pending",
+    "threshold_triggered": true,
+    "voyage_id": "00000000-0000-0000-0000-000000000004"
+  },
+  "producer": "opticargo-fixture-generator"
+}

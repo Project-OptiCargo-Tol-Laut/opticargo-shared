@@ -1,0 +1,19 @@
+{
+  "actor_id": null,
+  "correlation_id": "00000000-0000-0000-0000-000000000002",
+  "entity_id": "00000000-0000-0000-0000-00000000000a",
+  "entity_type": "review",
+  "event_id": "00000000-0000-0000-0000-000000000001",
+  "event_type": "review.created",
+  "event_version": "1.0",
+  "idempotency_key": "fixture:review.created",
+  "occurred_at": "2026-07-29T10:00:00Z",
+  "payload": {
+    "booking_id": "00000000-0000-0000-0000-000000000003",
+    "rating": 5,
+    "review_id": "00000000-0000-0000-0000-00000000000a",
+    "reviewee_id": "00000000-0000-0000-0000-00000000000b",
+    "reviewer_id": "00000000-0000-0000-0000-000000000006"
+  },
+  "producer": "opticargo-fixture-generator"
+}
