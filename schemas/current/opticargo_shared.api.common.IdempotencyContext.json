@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 255,
+      "minLength": 1,
+      "title": "Idempotency Key",
+      "type": "string"
+    }
+  },
+  "required": [
+    "idempotency_key",
+    "correlation_id"
+  ],
+  "title": "IdempotencyContext",
+  "type": "object"
+}

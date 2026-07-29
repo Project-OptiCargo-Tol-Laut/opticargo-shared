@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "dataset_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dataset Version"
+    },
+    "fallback_available": {
+      "title": "Fallback Available",
+      "type": "boolean"
+    },
+    "healthy": {
+      "title": "Healthy",
+      "type": "boolean"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+        "type": "string"
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "model_mode": {
+      "$ref": "#/$defs/ModelMode"
+    },
+    "model_name": {
+      "title": "Model Name",
+      "type": "string"
+    },
+    "model_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Version"
+    },
+    "trained_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trained At"
+    }
+  },
+  "required": [
+    "model_name",
+    "model_mode",
+    "fallback_available",
+    "healthy"
+  ],
+  "title": "ModelStatus",
+  "type": "object"
+}

@@ -1,0 +1,21 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Volume Ton",
+      "type": "string"
+    }
+  },
+  "required": [
+    "timestamp",
+    "volume_ton"
+  ],
+  "title": "HistoricalDemandPoint",
+  "type": "object"
+}

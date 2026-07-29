@@ -1,0 +1,55 @@
+{
+  "$defs": {
+    "PaymentStatus": {
+      "enum": [
+        "pending",
+        "paid",
+        "failed",
+        "refunded"
+      ],
+      "title": "PaymentStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Amount",
+      "type": "string"
+    },
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "external_reference": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Reference"
+    },
+    "payment_id": {
+      "format": "uuid",
+      "title": "Payment Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/PaymentStatus"
+    }
+  },
+  "required": [
+    "payment_id",
+    "booking_id",
+    "amount",
+    "status"
+  ],
+  "title": "PaymentCreatedPayload",
+  "type": "object"
+}

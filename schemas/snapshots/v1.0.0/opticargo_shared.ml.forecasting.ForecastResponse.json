@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "ForecastPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence_lower": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Confidence Lower",
+          "type": "string"
+        },
+        "confidence_upper": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Confidence Upper",
+          "type": "string"
+        },
+        "predicted_volume_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Predicted Volume Ton",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp",
+        "predicted_volume_ton",
+        "confidence_lower",
+        "confidence_upper"
+      ],
+      "title": "ForecastPoint",
+      "type": "object"
+    },
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "commodity_id": {
+      "format": "uuid",
+      "title": "Commodity Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "model_mode": {
+      "$ref": "#/$defs/ModelMode"
+    },
+    "model_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Version"
+    },
+    "points": {
+      "items": {
+        "$ref": "#/$defs/ForecastPoint"
+      },
+      "title": "Points",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "commodity_id",
+    "points",
+    "model_mode"
+  ],
+  "title": "ForecastResponse",
+  "type": "object"
+}

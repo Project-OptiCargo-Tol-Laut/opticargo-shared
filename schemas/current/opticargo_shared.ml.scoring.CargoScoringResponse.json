@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "FeatureExplanation": {
+      "additionalProperties": false,
+      "properties": {
+        "contribution": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Contribution",
+          "type": "string"
+        },
+        "explanation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Explanation"
+        },
+        "feature": {
+          "title": "Feature",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "feature",
+        "contribution"
+      ],
+      "title": "FeatureExplanation",
+      "type": "object"
+    },
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "fallback_used": {
+      "default": false,
+      "title": "Fallback Used",
+      "type": "boolean"
+    },
+    "feature_explanations": {
+      "items": {
+        "$ref": "#/$defs/FeatureExplanation"
+      },
+      "title": "Feature Explanations",
+      "type": "array"
+    },
+    "inference_timestamp": {
+      "format": "date-time",
+      "title": "Inference Timestamp",
+      "type": "string"
+    },
+    "model_mode": {
+      "$ref": "#/$defs/ModelMode"
+    },
+    "model_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Version"
+    },
+    "score": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Score",
+      "type": "string"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "score",
+    "model_mode",
+    "inference_timestamp"
+  ],
+  "title": "CargoScoringResponse",
+  "type": "object"
+}

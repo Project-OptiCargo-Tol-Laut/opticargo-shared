@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "confidence_lower": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Confidence Lower",
+      "type": "string"
+    },
+    "confidence_upper": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Confidence Upper",
+      "type": "string"
+    },
+    "predicted_volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Predicted Volume Ton",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "timestamp",
+    "predicted_volume_ton",
+    "confidence_lower",
+    "confidence_upper"
+  ],
+  "title": "ForecastPoint",
+  "type": "object"
+}

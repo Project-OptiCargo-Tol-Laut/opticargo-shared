@@ -1,0 +1,391 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "format": "uuid",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Version"
+        },
+        "excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excerpt"
+        },
+        "issuer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "title"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    },
+    "RankedCargoCombination": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo_listing_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Cargo Listing Ids",
+          "type": "array"
+        },
+        "rank": {
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank",
+        "cargo_listing_ids",
+        "score"
+      ],
+      "title": "RankedCargoCombination",
+      "type": "object"
+    },
+    "RecommendationContent": {
+      "additionalProperties": false,
+      "properties": {
+        "alternatives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Alternatives",
+          "type": "array"
+        },
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "confidence": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "estimated_cost": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost"
+        },
+        "estimated_revenue": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Revenue"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "hard_constraints_checked": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hard Constraints Checked",
+          "type": "array"
+        },
+        "ranked_cargo_combination": {
+          "items": {
+            "$ref": "#/$defs/RankedCargoCombination"
+          },
+          "title": "Ranked Cargo Combination",
+          "type": "array"
+        },
+        "recommended_human_action": {
+          "minLength": 1,
+          "title": "Recommended Human Action",
+          "type": "string"
+        },
+        "risks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks",
+          "type": "array"
+        },
+        "score_breakdown": {
+          "$ref": "#/$defs/ScoreBreakdown"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary",
+        "score_breakdown",
+        "confidence",
+        "recommended_human_action"
+      ],
+      "title": "RecommendationContent",
+      "type": "object"
+    },
+    "RecommendationStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected"
+      ],
+      "title": "RecommendationStatus",
+      "type": "string"
+    },
+    "ScoreBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Capacity Fit",
+          "type": "string"
+        },
+        "distance_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Distance Fit",
+          "type": "string"
+        },
+        "economic_value": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Economic Value",
+          "type": "string"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "model_mode": {
+          "$ref": "#/$defs/ModelMode"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Version"
+        },
+        "risk_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Risk Score",
+          "type": "string"
+        },
+        "schedule_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Schedule Fit",
+          "type": "string"
+        },
+        "supplier_rating": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supplier Rating"
+        },
+        "total_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Total Score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total_score",
+        "economic_value",
+        "schedule_fit",
+        "capacity_fit",
+        "distance_fit",
+        "risk_score",
+        "model_mode"
+      ],
+      "title": "ScoreBreakdown",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "$ref": "#/$defs/RecommendationContent"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "model_mode": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ModelMode"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "recommendation_type": {
+      "minLength": 1,
+      "title": "Recommendation Type",
+      "type": "string"
+    },
+    "responded_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Responded At"
+    },
+    "score": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Score",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RecommendationStatus",
+      "default": "pending"
+    },
+    "trace_id": {
+      "format": "uuid",
+      "title": "Trace Id",
+      "type": "string"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "voyage_id",
+    "recommendation_type",
+    "content",
+    "score",
+    "generated_at",
+    "trace_id"
+  ],
+  "title": "RecommendationCreate",
+  "type": "object"
+}

@@ -1,0 +1,47 @@
+{
+  "$defs": {
+    "CursorMeta": {
+      "additionalProperties": false,
+      "properties": {
+        "has_more": {
+          "title": "Has More",
+          "type": "boolean"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Next Cursor"
+        }
+      },
+      "required": [
+        "has_more"
+      ],
+      "title": "CursorMeta",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {},
+      "title": "Items",
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/CursorMeta"
+    }
+  },
+  "required": [
+    "items",
+    "meta"
+  ],
+  "title": "CursorResponse",
+  "type": "object"
+}

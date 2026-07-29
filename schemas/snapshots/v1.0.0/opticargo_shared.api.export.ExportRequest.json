@@ -1,0 +1,28 @@
+{
+  "$defs": {
+    "ExportFormat": {
+      "enum": [
+        "pdf",
+        "xlsx"
+      ],
+      "title": "ExportFormat",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "filters": {
+      "additionalProperties": true,
+      "title": "Filters",
+      "type": "object"
+    },
+    "format": {
+      "$ref": "#/$defs/ExportFormat"
+    }
+  },
+  "required": [
+    "format"
+  ],
+  "title": "ExportRequest",
+  "type": "object"
+}

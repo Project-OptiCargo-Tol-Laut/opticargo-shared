@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "BookingStatus": {
+      "enum": [
+        "pending",
+        "confirmed",
+        "paid",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "disputed"
+      ],
+      "title": "BookingStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "agreed_price_per_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Agreed Price Per Ton",
+      "type": "string"
+    },
+    "booked_volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Booked Volume Ton",
+      "type": "string"
+    },
+    "booking_date": {
+      "format": "date-time",
+      "title": "Booking Date",
+      "type": "string"
+    },
+    "booking_ref": {
+      "minLength": 1,
+      "title": "Booking Ref",
+      "type": "string"
+    },
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "confirmation_date": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confirmation Date"
+    },
+    "created_by": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Created By"
+    },
+    "status": {
+      "$ref": "#/$defs/BookingStatus",
+      "default": "pending"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "voyage_id",
+    "cargo_listing_id",
+    "booked_volume_ton",
+    "agreed_price_per_ton",
+    "booking_date",
+    "booking_ref"
+  ],
+  "title": "BookingCreate",
+  "type": "object"
+}

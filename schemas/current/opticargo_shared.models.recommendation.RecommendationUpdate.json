@@ -1,0 +1,30 @@
+{
+  "$defs": {
+    "RecommendationStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected"
+      ],
+      "title": "RecommendationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "responded_at": {
+      "format": "date-time",
+      "title": "Responded At",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RecommendationStatus"
+    }
+  },
+  "required": [
+    "status",
+    "responded_at"
+  ],
+  "title": "RecommendationUpdate",
+  "type": "object"
+}

@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "ShipStatus": {
+      "enum": [
+        "active",
+        "maintenance",
+        "inactive",
+        "decommissioned"
+      ],
+      "title": "ShipStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "cargo_capacity_m3": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Cargo Capacity M3",
+      "type": "string"
+    },
+    "certifications": {
+      "additionalProperties": true,
+      "title": "Certifications",
+      "type": "object"
+    },
+    "deadweight_tonnage": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Deadweight Tonnage",
+      "type": "string"
+    },
+    "flag": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Flag"
+    },
+    "gross_tonnage": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Gross Tonnage",
+      "type": "string"
+    },
+    "imo_number": {
+      "minLength": 1,
+      "title": "Imo Number",
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "operator_id": {
+      "format": "uuid",
+      "title": "Operator Id",
+      "type": "string"
+    },
+    "ship_type": {
+      "minLength": 1,
+      "title": "Ship Type",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ShipStatus"
+    }
+  },
+  "required": [
+    "name",
+    "imo_number",
+    "ship_type",
+    "gross_tonnage",
+    "deadweight_tonnage",
+    "cargo_capacity_m3",
+    "operator_id",
+    "status"
+  ],
+  "title": "ShipCreate",
+  "type": "object"
+}

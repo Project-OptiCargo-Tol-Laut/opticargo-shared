@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    },
+    "ScoreBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Capacity Fit",
+          "type": "string"
+        },
+        "distance_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Distance Fit",
+          "type": "string"
+        },
+        "economic_value": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Economic Value",
+          "type": "string"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "model_mode": {
+          "$ref": "#/$defs/ModelMode"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Version"
+        },
+        "risk_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Risk Score",
+          "type": "string"
+        },
+        "schedule_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Schedule Fit",
+          "type": "string"
+        },
+        "supplier_rating": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supplier Rating"
+        },
+        "total_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Total Score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total_score",
+        "economic_value",
+        "schedule_fit",
+        "capacity_fit",
+        "distance_fit",
+        "risk_score",
+        "model_mode"
+      ],
+      "title": "ScoreBreakdown",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "cargo_listing_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "title": "Cargo Listing Ids",
+      "type": "array"
+    },
+    "estimated_cost": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Cost"
+    },
+    "estimated_revenue": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Revenue"
+    },
+    "rank": {
+      "minimum": 1,
+      "title": "Rank",
+      "type": "integer"
+    },
+    "recommended_action": {
+      "title": "Recommended Action",
+      "type": "string"
+    },
+    "risks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "score": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Score",
+      "type": "string"
+    },
+    "score_breakdown": {
+      "$ref": "#/$defs/ScoreBreakdown"
+    }
+  },
+  "required": [
+    "rank",
+    "score",
+    "score_breakdown",
+    "recommended_action"
+  ],
+  "title": "RankedRecommendation",
+  "type": "object"
+}

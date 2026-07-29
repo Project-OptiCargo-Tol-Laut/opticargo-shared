@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "risk_features": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Risk Features",
+      "type": "object"
+    },
+    "supplier_id": {
+      "format": "uuid",
+      "title": "Supplier Id",
+      "type": "string"
+    },
+    "supplier_rating": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supplier Rating"
+    }
+  },
+  "required": [
+    "supplier_id"
+  ],
+  "title": "SupplierRiskFeatures",
+  "type": "object"
+}

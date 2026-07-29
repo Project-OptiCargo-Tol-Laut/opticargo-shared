@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "RouteType": {
+      "enum": [
+        "toll_sea",
+        "commercial",
+        "private"
+      ],
+      "title": "RouteType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "destination_port_id": {
+      "format": "uuid",
+      "title": "Destination Port Id",
+      "type": "string"
+    },
+    "distance_nm": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Distance Nm",
+      "type": "string"
+    },
+    "estimated_days": {
+      "exclusiveMinimum": 0,
+      "title": "Estimated Days",
+      "type": "integer"
+    },
+    "is_active": {
+      "default": true,
+      "title": "Is Active",
+      "type": "boolean"
+    },
+    "origin_port_id": {
+      "format": "uuid",
+      "title": "Origin Port Id",
+      "type": "string"
+    },
+    "route_type": {
+      "$ref": "#/$defs/RouteType"
+    }
+  },
+  "required": [
+    "origin_port_id",
+    "destination_port_id",
+    "distance_nm",
+    "estimated_days",
+    "route_type"
+  ],
+  "title": "RouteBase",
+  "type": "object"
+}

@@ -1,0 +1,40 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "rating": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Rating",
+      "type": "integer"
+    },
+    "review_id": {
+      "format": "uuid",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "reviewee_id": {
+      "format": "uuid",
+      "title": "Reviewee Id",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "format": "uuid",
+      "title": "Reviewer Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "review_id",
+    "booking_id",
+    "reviewer_id",
+    "reviewee_id",
+    "rating"
+  ],
+  "title": "ReviewCreatedPayload",
+  "type": "object"
+}

@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "AccountStatus": {
+      "enum": [
+        "pending",
+        "active",
+        "suspended",
+        "disabled"
+      ],
+      "title": "AccountStatus",
+      "type": "string"
+    },
+    "UserRole": {
+      "enum": [
+        "admin",
+        "operator_kapal",
+        "distributor",
+        "umkm",
+        "pengepul",
+        "koperasi",
+        "pelabuhan",
+        "pemerintah",
+        "eksportir",
+        "operator_kapal"
+      ],
+      "title": "UserRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Public create contract; password handling remains gateway-owned.",
+  "properties": {
+    "account_status": {
+      "$ref": "#/$defs/AccountStatus",
+      "default": "pending"
+    },
+    "company_name": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Company Name"
+    },
+    "email": {
+      "format": "email",
+      "title": "Email",
+      "type": "string"
+    },
+    "phone": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "minLength": 3,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Phone"
+    },
+    "role": {
+      "$ref": "#/$defs/UserRole"
+    },
+    "username": {
+      "maxLength": 64,
+      "minLength": 3,
+      "title": "Username",
+      "type": "string"
+    }
+  },
+  "required": [
+    "username",
+    "email",
+    "role"
+  ],
+  "title": "UserCreate",
+  "type": "object"
+}

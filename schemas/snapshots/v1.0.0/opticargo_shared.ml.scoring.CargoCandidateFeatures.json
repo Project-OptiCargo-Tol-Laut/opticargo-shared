@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "cargo_volume_m3": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cargo Volume M3"
+    },
+    "cargo_weight_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Cargo Weight Ton",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Features",
+      "type": "object"
+    }
+  },
+  "required": [
+    "cargo_listing_id",
+    "cargo_weight_ton"
+  ],
+  "title": "CargoCandidateFeatures",
+  "type": "object"
+}

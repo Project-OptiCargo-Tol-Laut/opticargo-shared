@@ -1,0 +1,73 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "available_volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Available Volume Ton",
+      "type": "string"
+    },
+    "capacity_compatible": {
+      "title": "Capacity Compatible",
+      "type": "boolean"
+    },
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "certification_compatible": {
+      "title": "Certification Compatible",
+      "type": "boolean"
+    },
+    "commodity_id": {
+      "format": "uuid",
+      "title": "Commodity Id",
+      "type": "string"
+    },
+    "destination_port_id": {
+      "format": "uuid",
+      "title": "Destination Port Id",
+      "type": "string"
+    },
+    "distance_to_port": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance To Port"
+    },
+    "origin_port_id": {
+      "format": "uuid",
+      "title": "Origin Port Id",
+      "type": "string"
+    },
+    "schedule_compatible": {
+      "title": "Schedule Compatible",
+      "type": "boolean"
+    },
+    "supplier_id": {
+      "format": "uuid",
+      "title": "Supplier Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cargo_listing_id",
+    "supplier_id",
+    "commodity_id",
+    "origin_port_id",
+    "destination_port_id",
+    "available_volume_ton",
+    "schedule_compatible",
+    "capacity_compatible",
+    "certification_compatible"
+  ],
+  "title": "CargoCandidate",
+  "type": "object"
+}

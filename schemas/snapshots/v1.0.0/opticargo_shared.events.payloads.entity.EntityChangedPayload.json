@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "EntityChangeType": {
+      "enum": [
+        "created",
+        "updated",
+        "deleted"
+      ],
+      "title": "EntityChangeType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "change_type": {
+      "$ref": "#/$defs/EntityChangeType"
+    },
+    "changed_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Fields",
+      "type": "array"
+    },
+    "entity_id": {
+      "format": "uuid",
+      "title": "Entity Id",
+      "type": "string"
+    },
+    "entity_type": {
+      "minLength": 1,
+      "title": "Entity Type",
+      "type": "string"
+    },
+    "entity_version": {
+      "minLength": 1,
+      "title": "Entity Version",
+      "type": "string"
+    },
+    "lookup_hint": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lookup Hint"
+    },
+    "snapshot": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Snapshot"
+    }
+  },
+  "required": [
+    "entity_type",
+    "entity_id",
+    "change_type",
+    "entity_version"
+  ],
+  "title": "EntityChangedPayload",
+  "type": "object"
+}

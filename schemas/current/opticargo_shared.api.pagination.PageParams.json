@@ -1,0 +1,20 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "page_size": {
+      "default": 20,
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Page Size",
+      "type": "integer"
+    }
+  },
+  "title": "PageParams",
+  "type": "object"
+}

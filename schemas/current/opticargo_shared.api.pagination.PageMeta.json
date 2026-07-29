@@ -1,0 +1,34 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "page_size": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Page Size",
+      "type": "integer"
+    },
+    "total_items": {
+      "minimum": 0,
+      "title": "Total Items",
+      "type": "integer"
+    },
+    "total_pages": {
+      "minimum": 0,
+      "title": "Total Pages",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "page",
+    "page_size",
+    "total_items",
+    "total_pages"
+  ],
+  "title": "PageMeta",
+  "type": "object"
+}

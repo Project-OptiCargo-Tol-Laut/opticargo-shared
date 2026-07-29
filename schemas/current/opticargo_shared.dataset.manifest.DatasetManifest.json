@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "checksum": {
+      "minLength": 1,
+      "title": "Checksum",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_name": {
+      "minLength": 1,
+      "title": "Dataset Name",
+      "type": "string"
+    },
+    "dataset_version": {
+      "minLength": 1,
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "is_synthetic": {
+      "title": "Is Synthetic",
+      "type": "boolean"
+    },
+    "record_count": {
+      "minimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "schema_package_version": {
+      "minLength": 1,
+      "title": "Schema Package Version",
+      "type": "string"
+    },
+    "source_references": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source References",
+      "type": "array"
+    },
+    "source_type": {
+      "minLength": 1,
+      "title": "Source Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dataset_name",
+    "dataset_version",
+    "created_at",
+    "source_type",
+    "is_synthetic",
+    "record_count",
+    "schema_package_version",
+    "checksum"
+  ],
+  "title": "DatasetManifest",
+  "type": "object"
+}

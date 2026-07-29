@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "TemperatureRange": {
+      "additionalProperties": false,
+      "properties": {
+        "max_celsius": {
+          "title": "Max Celsius",
+          "type": "number"
+        },
+        "min_celsius": {
+          "title": "Min Celsius",
+          "type": "number"
+        }
+      },
+      "required": [
+        "min_celsius",
+        "max_celsius"
+      ],
+      "title": "TemperatureRange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "available_volume_m3": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Available Volume M3",
+      "type": "string"
+    },
+    "available_weight_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Available Weight Ton",
+      "type": "string"
+    },
+    "cargo_type_allowed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Cargo Type Allowed",
+      "type": "array"
+    },
+    "temperature_range": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TemperatureRange"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "voyage_id",
+    "available_weight_ton",
+    "available_volume_m3"
+  ],
+  "title": "CargoCapacityCreate",
+  "type": "object"
+}

@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "AccountStatus": {
+      "enum": [
+        "pending",
+        "active",
+        "suspended",
+        "disabled"
+      ],
+      "title": "AccountStatus",
+      "type": "string"
+    },
+    "UserRole": {
+      "enum": [
+        "admin",
+        "operator_kapal",
+        "distributor",
+        "umkm",
+        "pengepul",
+        "koperasi",
+        "pelabuhan",
+        "pemerintah",
+        "eksportir",
+        "operator_kapal"
+      ],
+      "title": "UserRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "account_status": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AccountStatus"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "company_name": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Company Name"
+    },
+    "email": {
+      "anyOf": [
+        {
+          "format": "email",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Email"
+    },
+    "phone": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "minLength": 3,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Phone"
+    },
+    "role": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/UserRole"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "username": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "minLength": 3,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Username"
+    }
+  },
+  "title": "UserUpdate",
+  "type": "object"
+}

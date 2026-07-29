@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "TemperatureRange": {
+      "additionalProperties": false,
+      "properties": {
+        "max_celsius": {
+          "title": "Max Celsius",
+          "type": "number"
+        },
+        "min_celsius": {
+          "title": "Min Celsius",
+          "type": "number"
+        }
+      },
+      "required": [
+        "min_celsius",
+        "max_celsius"
+      ],
+      "title": "TemperatureRange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "available_volume_m3": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Available Volume M3"
+    },
+    "available_weight_ton": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Available Weight Ton"
+    },
+    "cargo_type_allowed": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cargo Type Allowed"
+    },
+    "temperature_range": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TemperatureRange"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "title": "CargoCapacityUpdate",
+  "type": "object"
+}

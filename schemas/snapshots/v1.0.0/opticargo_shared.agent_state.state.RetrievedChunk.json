@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "chunk_id": {
+      "format": "uuid",
+      "title": "Chunk Id",
+      "type": "string"
+    },
+    "document_id": {
+      "format": "uuid",
+      "title": "Document Id",
+      "type": "string"
+    },
+    "score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Score"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_id",
+    "chunk_id",
+    "text"
+  ],
+  "title": "RetrievedChunk",
+  "type": "object"
+}

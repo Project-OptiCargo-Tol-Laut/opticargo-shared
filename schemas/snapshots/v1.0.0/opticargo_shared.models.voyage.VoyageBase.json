@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "VoyageStatus": {
+      "enum": [
+        "scheduled",
+        "in_transit",
+        "completed",
+        "cancelled",
+        "delayed"
+      ],
+      "title": "VoyageStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "arrival_date": {
+      "format": "date-time",
+      "title": "Arrival Date",
+      "type": "string"
+    },
+    "departure_date": {
+      "format": "date-time",
+      "title": "Departure Date",
+      "type": "string"
+    },
+    "remaining_capacity_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Remaining Capacity Ton",
+      "type": "string"
+    },
+    "route_id": {
+      "format": "uuid",
+      "title": "Route Id",
+      "type": "string"
+    },
+    "ship_id": {
+      "format": "uuid",
+      "title": "Ship Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/VoyageStatus"
+    },
+    "total_capacity_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Total Capacity Ton",
+      "type": "string"
+    },
+    "used_capacity_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Used Capacity Ton",
+      "type": "string"
+    },
+    "waypoints": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Waypoints",
+      "type": "array"
+    }
+  },
+  "required": [
+    "ship_id",
+    "route_id",
+    "departure_date",
+    "arrival_date",
+    "total_capacity_ton",
+    "used_capacity_ton",
+    "remaining_capacity_ton",
+    "status"
+  ],
+  "title": "VoyageBase",
+  "type": "object"
+}

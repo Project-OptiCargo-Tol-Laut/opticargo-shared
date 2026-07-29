@@ -1,0 +1,46 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "comment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Comment"
+    },
+    "rating": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Rating",
+      "type": "integer"
+    },
+    "reviewee_id": {
+      "format": "uuid",
+      "title": "Reviewee Id",
+      "type": "string"
+    },
+    "reviewer_id": {
+      "format": "uuid",
+      "title": "Reviewer Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "booking_id",
+    "reviewer_id",
+    "reviewee_id",
+    "rating"
+  ],
+  "title": "ReviewBase",
+  "type": "object"
+}

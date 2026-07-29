@@ -1,0 +1,64 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "minLength": 1,
+      "title": "Category",
+      "type": "string"
+    },
+    "certifications_required": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Certifications Required",
+      "type": "array"
+    },
+    "hs_code": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hs Code"
+    },
+    "is_perishable": {
+      "default": false,
+      "title": "Is Perishable",
+      "type": "boolean"
+    },
+    "max_stack_height": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Stack Height"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "special_requirements": {
+      "additionalProperties": true,
+      "title": "Special Requirements",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "category"
+  ],
+  "title": "CommodityBase",
+  "type": "object"
+}

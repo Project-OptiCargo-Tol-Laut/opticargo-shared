@@ -1,0 +1,38 @@
+{
+  "$defs": {
+    "QueryIntent": {
+      "enum": [
+        "regulation",
+        "matching",
+        "route",
+        "analytics",
+        "unknown"
+      ],
+      "title": "QueryIntent",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "intent": {
+      "$ref": "#/$defs/QueryIntent"
+    },
+    "rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Rationale"
+    }
+  },
+  "required": [
+    "intent"
+  ],
+  "title": "IntentResult",
+  "type": "object"
+}

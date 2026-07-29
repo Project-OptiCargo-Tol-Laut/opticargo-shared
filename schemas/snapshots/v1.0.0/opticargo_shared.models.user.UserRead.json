@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "AccountStatus": {
+      "enum": [
+        "pending",
+        "active",
+        "suspended",
+        "disabled"
+      ],
+      "title": "AccountStatus",
+      "type": "string"
+    },
+    "UserRole": {
+      "enum": [
+        "admin",
+        "operator_kapal",
+        "distributor",
+        "umkm",
+        "pengepul",
+        "koperasi",
+        "pelabuhan",
+        "pemerintah",
+        "eksportir",
+        "operator_kapal"
+      ],
+      "title": "UserRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "account_status": {
+      "$ref": "#/$defs/AccountStatus",
+      "default": "pending"
+    },
+    "company_name": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Company Name"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "email": {
+      "format": "email",
+      "title": "Email",
+      "type": "string"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "phone": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "minLength": 3,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Phone"
+    },
+    "role": {
+      "$ref": "#/$defs/UserRole"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "username": {
+      "maxLength": 64,
+      "minLength": 3,
+      "title": "Username",
+      "type": "string"
+    }
+  },
+  "required": [
+    "username",
+    "email",
+    "role",
+    "id",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "UserRead",
+  "type": "object"
+}

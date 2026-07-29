@@ -1,0 +1,24 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "reasons": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Reasons",
+      "type": "array"
+    }
+  },
+  "required": [
+    "cargo_listing_id",
+    "reasons"
+  ],
+  "title": "RejectedCandidate",
+  "type": "object"
+}

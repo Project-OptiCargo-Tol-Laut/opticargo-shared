@@ -1,0 +1,84 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "address": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Address"
+    },
+    "avg_monthly_volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Avg Monthly Volume Ton",
+      "type": "string"
+    },
+    "business_name": {
+      "minLength": 1,
+      "title": "Business Name",
+      "type": "string"
+    },
+    "commodity_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "title": "Commodity Ids",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "port_id": {
+      "format": "uuid",
+      "title": "Port Id",
+      "type": "string"
+    },
+    "rating": {
+      "default": 0,
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Rating",
+      "type": "number"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "user_id": {
+      "format": "uuid",
+      "title": "User Id",
+      "type": "string"
+    },
+    "verified": {
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "user_id",
+    "business_name",
+    "port_id",
+    "avg_monthly_volume_ton",
+    "id",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "SupplierRead",
+  "type": "object"
+}

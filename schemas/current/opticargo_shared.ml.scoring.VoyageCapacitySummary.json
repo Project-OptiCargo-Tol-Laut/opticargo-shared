@@ -1,0 +1,27 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "remaining_volume_m3": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Remaining Volume M3",
+      "type": "string"
+    },
+    "remaining_weight_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Remaining Weight Ton",
+      "type": "string"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "voyage_id",
+    "remaining_weight_ton",
+    "remaining_volume_m3"
+  ],
+  "title": "VoyageCapacitySummary",
+  "type": "object"
+}

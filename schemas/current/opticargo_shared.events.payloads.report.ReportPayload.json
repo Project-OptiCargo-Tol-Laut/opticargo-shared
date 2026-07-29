@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "ExportFormat": {
+      "enum": [
+        "pdf",
+        "xlsx"
+      ],
+      "title": "ExportFormat",
+      "type": "string"
+    },
+    "ReportStatus": {
+      "enum": [
+        "queued",
+        "processing",
+        "completed",
+        "failed"
+      ],
+      "title": "ReportStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Completed At"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "format": {
+      "$ref": "#/$defs/ExportFormat"
+    },
+    "report_id": {
+      "format": "uuid",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "report_type": {
+      "title": "Report Type",
+      "type": "string"
+    },
+    "requested_by": {
+      "format": "uuid",
+      "title": "Requested By",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ReportStatus"
+    }
+  },
+  "required": [
+    "report_id",
+    "report_type",
+    "format",
+    "status",
+    "requested_by"
+  ],
+  "title": "ReportPayload",
+  "type": "object"
+}

@@ -1,0 +1,47 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "checksum": {
+      "title": "Checksum",
+      "type": "string"
+    },
+    "document_id": {
+      "format": "uuid",
+      "title": "Document Id",
+      "type": "string"
+    },
+    "document_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Document Version"
+    },
+    "is_superseded": {
+      "default": false,
+      "title": "Is Superseded",
+      "type": "boolean"
+    },
+    "mime_type": {
+      "title": "Mime Type",
+      "type": "string"
+    },
+    "object_key": {
+      "title": "Object Key",
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_id",
+    "object_key",
+    "mime_type",
+    "checksum"
+  ],
+  "title": "DocumentUploadedPayload",
+  "type": "object"
+}

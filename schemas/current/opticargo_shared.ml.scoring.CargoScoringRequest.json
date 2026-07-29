@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "CargoCandidateFeatures": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo_listing_id": {
+          "format": "uuid",
+          "title": "Cargo Listing Id",
+          "type": "string"
+        },
+        "cargo_volume_m3": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cargo Volume M3"
+        },
+        "cargo_weight_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Cargo Weight Ton",
+          "type": "string"
+        },
+        "features": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Features",
+          "type": "object"
+        }
+      },
+      "required": [
+        "cargo_listing_id",
+        "cargo_weight_ton"
+      ],
+      "title": "CargoCandidateFeatures",
+      "type": "object"
+    },
+    "RouteScheduleFeatures": {
+      "additionalProperties": false,
+      "properties": {
+        "distance_nm": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Distance Nm",
+          "type": "string"
+        },
+        "route_features": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Route Features",
+          "type": "object"
+        },
+        "schedule_compatible": {
+          "title": "Schedule Compatible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "distance_nm",
+        "schedule_compatible"
+      ],
+      "title": "RouteScheduleFeatures",
+      "type": "object"
+    },
+    "SupplierRiskFeatures": {
+      "additionalProperties": false,
+      "properties": {
+        "risk_features": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Risk Features",
+          "type": "object"
+        },
+        "supplier_id": {
+          "format": "uuid",
+          "title": "Supplier Id",
+          "type": "string"
+        },
+        "supplier_rating": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supplier Rating"
+        }
+      },
+      "required": [
+        "supplier_id"
+      ],
+      "title": "SupplierRiskFeatures",
+      "type": "object"
+    },
+    "VoyageCapacitySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "remaining_volume_m3": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Remaining Volume M3",
+          "type": "string"
+        },
+        "remaining_weight_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Remaining Weight Ton",
+          "type": "string"
+        },
+        "voyage_id": {
+          "format": "uuid",
+          "title": "Voyage Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "voyage_id",
+        "remaining_weight_ton",
+        "remaining_volume_m3"
+      ],
+      "title": "VoyageCapacitySummary",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidate": {
+      "$ref": "#/$defs/CargoCandidateFeatures"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "route_schedule": {
+      "$ref": "#/$defs/RouteScheduleFeatures"
+    },
+    "supplier_risk": {
+      "$ref": "#/$defs/SupplierRiskFeatures"
+    },
+    "voyage": {
+      "$ref": "#/$defs/VoyageCapacitySummary"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "voyage",
+    "candidate",
+    "route_schedule",
+    "supplier_risk"
+  ],
+  "title": "CargoScoringRequest",
+  "type": "object"
+}

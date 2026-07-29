@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "BookingStatus": {
+      "enum": [
+        "pending",
+        "confirmed",
+        "paid",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "disputed"
+      ],
+      "title": "BookingStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "actor_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actor Id"
+    },
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "new_status": {
+      "$ref": "#/$defs/BookingStatus"
+    },
+    "previous_status": {
+      "$ref": "#/$defs/BookingStatus"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "booking_id",
+    "previous_status",
+    "new_status",
+    "voyage_id",
+    "cargo_listing_id"
+  ],
+  "title": "BookingStatusChangedPayload",
+  "type": "object"
+}

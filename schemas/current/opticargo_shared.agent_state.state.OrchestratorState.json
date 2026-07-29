@@ -1,0 +1,692 @@
+{
+  "$defs": {
+    "AgentNodeStatus": {
+      "enum": [
+        "pending",
+        "running",
+        "completed",
+        "skipped",
+        "failed",
+        "fallback"
+      ],
+      "title": "AgentNodeStatus",
+      "type": "string"
+    },
+    "CargoCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "available_volume_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Available Volume Ton",
+          "type": "string"
+        },
+        "capacity_compatible": {
+          "title": "Capacity Compatible",
+          "type": "boolean"
+        },
+        "cargo_listing_id": {
+          "format": "uuid",
+          "title": "Cargo Listing Id",
+          "type": "string"
+        },
+        "certification_compatible": {
+          "title": "Certification Compatible",
+          "type": "boolean"
+        },
+        "commodity_id": {
+          "format": "uuid",
+          "title": "Commodity Id",
+          "type": "string"
+        },
+        "destination_port_id": {
+          "format": "uuid",
+          "title": "Destination Port Id",
+          "type": "string"
+        },
+        "distance_to_port": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance To Port"
+        },
+        "origin_port_id": {
+          "format": "uuid",
+          "title": "Origin Port Id",
+          "type": "string"
+        },
+        "schedule_compatible": {
+          "title": "Schedule Compatible",
+          "type": "boolean"
+        },
+        "supplier_id": {
+          "format": "uuid",
+          "title": "Supplier Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cargo_listing_id",
+        "supplier_id",
+        "commodity_id",
+        "origin_port_id",
+        "destination_port_id",
+        "available_volume_ton",
+        "schedule_compatible",
+        "capacity_compatible",
+        "certification_compatible"
+      ],
+      "title": "CargoCandidate",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "format": "uuid",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "document_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Version"
+        },
+        "excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excerpt"
+        },
+        "issuer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section"
+        },
+        "source_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Reference"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "title"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "ConfidenceLevel": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "ConfidenceLevel",
+      "type": "string"
+    },
+    "ModelMode": {
+      "enum": [
+        "trained",
+        "heuristic"
+      ],
+      "title": "ModelMode",
+      "type": "string"
+    },
+    "OptimizationResult": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity_remaining_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Capacity Remaining Ton",
+          "type": "string"
+        },
+        "duration_ms": {
+          "minimum": 0,
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "estimated_cost": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost"
+        },
+        "estimated_revenue": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Estimated Revenue",
+          "type": "string"
+        },
+        "hard_constraints_valid": {
+          "title": "Hard Constraints Valid",
+          "type": "boolean"
+        },
+        "method": {
+          "minLength": 1,
+          "title": "Method",
+          "type": "string"
+        },
+        "rejected_candidates": {
+          "items": {
+            "$ref": "#/$defs/RejectedCandidate"
+          },
+          "title": "Rejected Candidates",
+          "type": "array"
+        },
+        "selected_cargo_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Selected Cargo Ids",
+          "type": "array"
+        },
+        "total_volume_m3": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Total Volume M3",
+          "type": "string"
+        },
+        "total_weight_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Total Weight Ton",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total_weight_ton",
+        "total_volume_m3",
+        "capacity_remaining_ton",
+        "estimated_revenue",
+        "hard_constraints_valid",
+        "method",
+        "duration_ms"
+      ],
+      "title": "OptimizationResult",
+      "type": "object"
+    },
+    "QueryIntent": {
+      "enum": [
+        "regulation",
+        "matching",
+        "route",
+        "analytics",
+        "unknown"
+      ],
+      "title": "QueryIntent",
+      "type": "string"
+    },
+    "RankedRecommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo_listing_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Cargo Listing Ids",
+          "type": "array"
+        },
+        "estimated_cost": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost"
+        },
+        "estimated_revenue": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Revenue"
+        },
+        "rank": {
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "recommended_action": {
+          "title": "Recommended Action",
+          "type": "string"
+        },
+        "risks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks",
+          "type": "array"
+        },
+        "score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Score",
+          "type": "string"
+        },
+        "score_breakdown": {
+          "$ref": "#/$defs/ScoreBreakdown"
+        }
+      },
+      "required": [
+        "rank",
+        "score",
+        "score_breakdown",
+        "recommended_action"
+      ],
+      "title": "RankedRecommendation",
+      "type": "object"
+    },
+    "RecommendationOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "abstained": {
+          "default": false,
+          "title": "Abstained",
+          "type": "boolean"
+        },
+        "abstention_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Abstention Reason"
+        },
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "title": "Citations",
+          "type": "array"
+        },
+        "confidence": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Confidence",
+          "type": "string"
+        },
+        "confidence_level": {
+          "$ref": "#/$defs/ConfidenceLevel"
+        },
+        "correlation_id": {
+          "format": "uuid",
+          "title": "Correlation Id",
+          "type": "string"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "intent": {
+          "$ref": "#/$defs/QueryIntent"
+        },
+        "recommendations": {
+          "items": {
+            "$ref": "#/$defs/RankedRecommendation"
+          },
+          "title": "Recommendations",
+          "type": "array"
+        },
+        "summary": {
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "voyage_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Voyage Id"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "correlation_id",
+        "intent",
+        "summary",
+        "confidence",
+        "confidence_level"
+      ],
+      "title": "RecommendationOutput",
+      "type": "object"
+    },
+    "RejectedCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo_listing_id": {
+          "format": "uuid",
+          "title": "Cargo Listing Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "cargo_listing_id",
+        "reasons"
+      ],
+      "title": "RejectedCandidate",
+      "type": "object"
+    },
+    "RetrievedChunk": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_id": {
+          "format": "uuid",
+          "title": "Chunk Id",
+          "type": "string"
+        },
+        "document_id": {
+          "format": "uuid",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Score"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "chunk_id",
+        "text"
+      ],
+      "title": "RetrievedChunk",
+      "type": "object"
+    },
+    "ScoreBreakdown": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Capacity Fit",
+          "type": "string"
+        },
+        "distance_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Distance Fit",
+          "type": "string"
+        },
+        "economic_value": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Economic Value",
+          "type": "string"
+        },
+        "fallback_used": {
+          "default": false,
+          "title": "Fallback Used",
+          "type": "boolean"
+        },
+        "model_mode": {
+          "$ref": "#/$defs/ModelMode"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Version"
+        },
+        "risk_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Risk Score",
+          "type": "string"
+        },
+        "schedule_fit": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Schedule Fit",
+          "type": "string"
+        },
+        "supplier_rating": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Supplier Rating"
+        },
+        "total_score": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Total Score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total_score",
+        "economic_value",
+        "schedule_fit",
+        "capacity_fit",
+        "distance_fit",
+        "risk_score",
+        "model_mode"
+      ],
+      "title": "ScoreBreakdown",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "fallback_used": {
+      "default": false,
+      "title": "Fallback Used",
+      "type": "boolean"
+    },
+    "graph_candidates": {
+      "items": {
+        "$ref": "#/$defs/CargoCandidate"
+      },
+      "title": "Graph Candidates",
+      "type": "array"
+    },
+    "node_statuses": {
+      "additionalProperties": {
+        "$ref": "#/$defs/AgentNodeStatus"
+      },
+      "title": "Node Statuses",
+      "type": "object"
+    },
+    "optimization_result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/OptimizationResult"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "query": {
+      "title": "Query",
+      "type": "string"
+    },
+    "query_intent": {
+      "$ref": "#/$defs/QueryIntent",
+      "default": "unknown"
+    },
+    "recommendation_output": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RecommendationOutput"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "retrieved_chunks": {
+      "items": {
+        "$ref": "#/$defs/RetrievedChunk"
+      },
+      "title": "Retrieved Chunks",
+      "type": "array"
+    },
+    "route_taken": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Route Taken",
+      "type": "array"
+    },
+    "scoring_results": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ScoreBreakdown"
+      },
+      "propertyNames": {
+        "format": "uuid"
+      },
+      "title": "Scoring Results",
+      "type": "object"
+    },
+    "user_id": {
+      "format": "uuid",
+      "title": "User Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "user_id",
+    "query"
+  ],
+  "title": "OrchestratorState",
+  "type": "object"
+}

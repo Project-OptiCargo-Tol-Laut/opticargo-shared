@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "PaymentMethod": {
+      "enum": [
+        "bank_transfer",
+        "virtual_account",
+        "e_wallet"
+      ],
+      "title": "PaymentMethod",
+      "type": "string"
+    },
+    "PaymentStatus": {
+      "enum": [
+        "pending",
+        "paid",
+        "failed",
+        "refunded"
+      ],
+      "title": "PaymentStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "amount": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Amount",
+      "type": "string"
+    },
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "external_reference": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "External Reference"
+    },
+    "method": {
+      "$ref": "#/$defs/PaymentMethod"
+    },
+    "paid_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Paid At"
+    },
+    "status": {
+      "$ref": "#/$defs/PaymentStatus",
+      "default": "pending"
+    }
+  },
+  "required": [
+    "booking_id",
+    "amount",
+    "method"
+  ],
+  "title": "PaymentBase",
+  "type": "object"
+}

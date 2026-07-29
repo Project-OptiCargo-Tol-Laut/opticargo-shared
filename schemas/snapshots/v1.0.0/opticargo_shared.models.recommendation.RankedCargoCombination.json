@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "cargo_listing_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Cargo Listing Ids",
+      "type": "array"
+    },
+    "rank": {
+      "minimum": 1,
+      "title": "Rank",
+      "type": "integer"
+    },
+    "score": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Score",
+      "type": "string"
+    }
+  },
+  "required": [
+    "rank",
+    "cargo_listing_ids",
+    "score"
+  ],
+  "title": "RankedCargoCombination",
+  "type": "object"
+}

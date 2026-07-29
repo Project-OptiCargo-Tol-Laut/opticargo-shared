@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "BookingStatus": {
+      "enum": [
+        "pending",
+        "confirmed",
+        "paid",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "disputed"
+      ],
+      "title": "BookingStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "actor_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Actor Id"
+    },
+    "booked_volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Booked Volume Ton",
+      "type": "string"
+    },
+    "booking_id": {
+      "format": "uuid",
+      "title": "Booking Id",
+      "type": "string"
+    },
+    "cargo_listing_id": {
+      "format": "uuid",
+      "title": "Cargo Listing Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/BookingStatus"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "booking_id",
+    "voyage_id",
+    "cargo_listing_id",
+    "booked_volume_ton",
+    "status"
+  ],
+  "title": "BookingCreatedPayload",
+  "type": "object"
+}

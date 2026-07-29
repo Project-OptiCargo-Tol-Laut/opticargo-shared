@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "max_celsius": {
+      "title": "Max Celsius",
+      "type": "number"
+    },
+    "min_celsius": {
+      "title": "Min Celsius",
+      "type": "number"
+    }
+  },
+  "required": [
+    "min_celsius",
+    "max_celsius"
+  ],
+  "title": "TemperatureRange",
+  "type": "object"
+}

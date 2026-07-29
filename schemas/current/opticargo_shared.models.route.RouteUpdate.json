@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "RouteType": {
+      "enum": [
+        "toll_sea",
+        "commercial",
+        "private"
+      ],
+      "title": "RouteType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "destination_port_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Destination Port Id"
+    },
+    "distance_nm": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Distance Nm"
+    },
+    "estimated_days": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Days"
+    },
+    "is_active": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Is Active"
+    },
+    "origin_port_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Origin Port Id"
+    },
+    "route_type": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RouteType"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "title": "RouteUpdate",
+  "type": "object"
+}

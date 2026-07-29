@@ -1,0 +1,80 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "city": {
+      "minLength": 1,
+      "title": "City",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "facilities": {
+      "additionalProperties": true,
+      "title": "Facilities",
+      "type": "object"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "latitude": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Latitude",
+      "type": "string"
+    },
+    "longitude": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Longitude",
+      "type": "string"
+    },
+    "max_vessel_tonnage": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Max Vessel Tonnage"
+    },
+    "name": {
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "operating_hours": {
+      "additionalProperties": true,
+      "title": "Operating Hours",
+      "type": "object"
+    },
+    "province": {
+      "minLength": 1,
+      "title": "Province",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "city",
+    "province",
+    "latitude",
+    "longitude",
+    "id",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "PortRead",
+  "type": "object"
+}

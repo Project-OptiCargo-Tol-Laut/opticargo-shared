@@ -1,0 +1,26 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "field": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Field"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "title": "ErrorDetail",
+  "type": "object"
+}

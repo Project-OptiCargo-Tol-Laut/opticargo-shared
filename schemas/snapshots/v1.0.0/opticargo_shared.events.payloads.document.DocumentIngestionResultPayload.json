@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "DocumentIngestionStatus": {
+      "enum": [
+        "queued",
+        "processing",
+        "indexed",
+        "failed"
+      ],
+      "title": "DocumentIngestionStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "chunk_count": {
+      "minimum": 0,
+      "title": "Chunk Count",
+      "type": "integer"
+    },
+    "document_id": {
+      "format": "uuid",
+      "title": "Document Id",
+      "type": "string"
+    },
+    "error_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Code"
+    },
+    "error_message": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Message"
+    },
+    "indexed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Indexed At"
+    },
+    "status": {
+      "$ref": "#/$defs/DocumentIngestionStatus"
+    }
+  },
+  "required": [
+    "document_id",
+    "status",
+    "chunk_count"
+  ],
+  "title": "DocumentIngestionResultPayload",
+  "type": "object"
+}

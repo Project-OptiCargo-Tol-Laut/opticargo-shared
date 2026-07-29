@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "DocumentIngestionStatus": {
+      "enum": [
+        "queued",
+        "processing",
+        "indexed",
+        "failed"
+      ],
+      "title": "DocumentIngestionStatus",
+      "type": "string"
+    },
+    "DocumentType": {
+      "enum": [
+        "manifest",
+        "bill_of_lading",
+        "regulation",
+        "certificate",
+        "invoice"
+      ],
+      "title": "DocumentType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "booking_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Booking Id"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "doc_type": {
+      "$ref": "#/$defs/DocumentType"
+    },
+    "document_version": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Document Version"
+    },
+    "effective_date": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effective Date"
+    },
+    "file_size": {
+      "exclusiveMinimum": 0,
+      "title": "File Size",
+      "type": "integer"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "ingestion_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ingestion Error"
+    },
+    "ingestion_status": {
+      "$ref": "#/$defs/DocumentIngestionStatus",
+      "default": "queued"
+    },
+    "is_superseded": {
+      "default": false,
+      "title": "Is Superseded",
+      "type": "boolean"
+    },
+    "issuer": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Issuer"
+    },
+    "mime_type": {
+      "minLength": 1,
+      "title": "Mime Type",
+      "type": "string"
+    },
+    "object_key": {
+      "minLength": 1,
+      "title": "Object Key",
+      "type": "string"
+    },
+    "source_reference": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Reference"
+    },
+    "supersedes_document_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Document Id"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "uploaded_by": {
+      "format": "uuid",
+      "title": "Uploaded By",
+      "type": "string"
+    }
+  },
+  "required": [
+    "doc_type",
+    "title",
+    "object_key",
+    "file_size",
+    "mime_type",
+    "uploaded_by",
+    "id",
+    "created_at",
+    "updated_at"
+  ],
+  "title": "DocumentRead",
+  "type": "object"
+}

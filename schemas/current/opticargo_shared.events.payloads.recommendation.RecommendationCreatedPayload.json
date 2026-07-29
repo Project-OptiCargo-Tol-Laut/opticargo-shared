@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "RecommendationStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected"
+      ],
+      "title": "RecommendationStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recipient_user_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "title": "Recipient User Ids",
+      "type": "array"
+    },
+    "recommendation_id": {
+      "format": "uuid",
+      "title": "Recommendation Id",
+      "type": "string"
+    },
+    "score": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Score",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/RecommendationStatus"
+    },
+    "threshold_triggered": {
+      "title": "Threshold Triggered",
+      "type": "boolean"
+    },
+    "voyage_id": {
+      "format": "uuid",
+      "title": "Voyage Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recommendation_id",
+    "voyage_id",
+    "score",
+    "status",
+    "recipient_user_ids",
+    "threshold_triggered"
+  ],
+  "title": "RecommendationCreatedPayload",
+  "type": "object"
+}

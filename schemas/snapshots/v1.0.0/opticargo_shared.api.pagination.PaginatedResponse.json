@@ -1,0 +1,35 @@
+{
+  "additionalProperties": false,
+  "description": "Deprecated v0 compatibility contract; prefer :class:`PageResponse`.",
+  "properties": {
+    "items": {
+      "items": {},
+      "title": "Items",
+      "type": "array"
+    },
+    "page": {
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "page_size": {
+      "maximum": 100,
+      "minimum": 1,
+      "title": "Page Size",
+      "type": "integer"
+    },
+    "total": {
+      "minimum": 0,
+      "title": "Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "items",
+    "total",
+    "page",
+    "page_size"
+  ],
+  "title": "PaginatedResponse",
+  "type": "object"
+}

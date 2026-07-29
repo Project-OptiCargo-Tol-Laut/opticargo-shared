@@ -1,0 +1,42 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "contribution": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Contribution",
+      "type": "string"
+    },
+    "explanation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Explanation"
+    },
+    "feature": {
+      "title": "Feature",
+      "type": "string"
+    },
+    "value": {
+      "anyOf": [
+        {},
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value"
+    }
+  },
+  "required": [
+    "feature",
+    "contribution"
+  ],
+  "title": "FeatureExplanation",
+  "type": "object"
+}

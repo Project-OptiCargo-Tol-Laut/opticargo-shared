@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "CargoListingStatus": {
+      "enum": [
+        "open",
+        "matched",
+        "closed",
+        "expired"
+      ],
+      "title": "CargoListingStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "asking_price_per_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Asking Price Per Ton",
+      "type": "string"
+    },
+    "available_from": {
+      "format": "date",
+      "title": "Available From",
+      "type": "string"
+    },
+    "available_until": {
+      "format": "date",
+      "title": "Available Until",
+      "type": "string"
+    },
+    "commodity_id": {
+      "format": "uuid",
+      "title": "Commodity Id",
+      "type": "string"
+    },
+    "destination_port_id": {
+      "format": "uuid",
+      "title": "Destination Port Id",
+      "type": "string"
+    },
+    "origin_port_id": {
+      "format": "uuid",
+      "title": "Origin Port Id",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/CargoListingStatus",
+      "default": "open"
+    },
+    "supplier_id": {
+      "format": "uuid",
+      "title": "Supplier Id",
+      "type": "string"
+    },
+    "volume_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Volume Ton",
+      "type": "string"
+    }
+  },
+  "required": [
+    "supplier_id",
+    "commodity_id",
+    "volume_ton",
+    "available_from",
+    "available_until",
+    "origin_port_id",
+    "destination_port_id",
+    "asking_price_per_ton"
+  ],
+  "title": "CargoListingBase",
+  "type": "object"
+}

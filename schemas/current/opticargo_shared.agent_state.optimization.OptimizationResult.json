@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "RejectedCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "cargo_listing_id": {
+          "format": "uuid",
+          "title": "Cargo Listing Id",
+          "type": "string"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Reasons",
+          "type": "array"
+        }
+      },
+      "required": [
+        "cargo_listing_id",
+        "reasons"
+      ],
+      "title": "RejectedCandidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "capacity_remaining_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Capacity Remaining Ton",
+      "type": "string"
+    },
+    "duration_ms": {
+      "minimum": 0,
+      "title": "Duration Ms",
+      "type": "integer"
+    },
+    "estimated_cost": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Estimated Cost"
+    },
+    "estimated_revenue": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Estimated Revenue",
+      "type": "string"
+    },
+    "hard_constraints_valid": {
+      "title": "Hard Constraints Valid",
+      "type": "boolean"
+    },
+    "method": {
+      "minLength": 1,
+      "title": "Method",
+      "type": "string"
+    },
+    "rejected_candidates": {
+      "items": {
+        "$ref": "#/$defs/RejectedCandidate"
+      },
+      "title": "Rejected Candidates",
+      "type": "array"
+    },
+    "selected_cargo_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "title": "Selected Cargo Ids",
+      "type": "array"
+    },
+    "total_volume_m3": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Total Volume M3",
+      "type": "string"
+    },
+    "total_weight_ton": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Total Weight Ton",
+      "type": "string"
+    }
+  },
+  "required": [
+    "total_weight_ton",
+    "total_volume_m3",
+    "capacity_remaining_ton",
+    "estimated_revenue",
+    "hard_constraints_valid",
+    "method",
+    "duration_ms"
+  ],
+  "title": "OptimizationResult",
+  "type": "object"
+}

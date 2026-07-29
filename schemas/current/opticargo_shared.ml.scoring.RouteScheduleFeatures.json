@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "distance_nm": {
+      "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+      "title": "Distance Nm",
+      "type": "string"
+    },
+    "route_features": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Route Features",
+      "type": "object"
+    },
+    "schedule_compatible": {
+      "title": "Schedule Compatible",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "distance_nm",
+    "schedule_compatible"
+  ],
+  "title": "RouteScheduleFeatures",
+  "type": "object"
+}

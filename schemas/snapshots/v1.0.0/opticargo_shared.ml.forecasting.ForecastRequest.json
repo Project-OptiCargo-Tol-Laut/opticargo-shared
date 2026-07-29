@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "HistoricalDemandPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "volume_ton": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Volume Ton",
+          "type": "string"
+        }
+      },
+      "required": [
+        "timestamp",
+        "volume_ton"
+      ],
+      "title": "HistoricalDemandPoint",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "commodity_id": {
+      "format": "uuid",
+      "title": "Commodity Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "historical_series_version": {
+      "title": "Historical Series Version",
+      "type": "string"
+    },
+    "history": {
+      "items": {
+        "$ref": "#/$defs/HistoricalDemandPoint"
+      },
+      "title": "History",
+      "type": "array"
+    },
+    "horizon_days": {
+      "exclusiveMinimum": 0,
+      "title": "Horizon Days",
+      "type": "integer"
+    },
+    "port_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Port Id"
+    },
+    "region": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Region"
+    }
+  },
+  "required": [
+    "correlation_id",
+    "commodity_id",
+    "horizon_days",
+    "historical_series_version"
+  ],
+  "title": "ForecastRequest",
+  "type": "object"
+}

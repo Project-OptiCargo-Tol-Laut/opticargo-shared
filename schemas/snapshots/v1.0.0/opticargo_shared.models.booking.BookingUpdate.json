@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "BookingStatus": {
+      "enum": [
+        "pending",
+        "confirmed",
+        "paid",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "disputed"
+      ],
+      "title": "BookingStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "agreed_price_per_ton": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Agreed Price Per Ton"
+    },
+    "booked_volume_ton": {
+      "anyOf": [
+        {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Booked Volume Ton"
+    },
+    "confirmation_date": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confirmation Date"
+    },
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/BookingStatus"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "title": "BookingUpdate",
+  "type": "object"
+}
