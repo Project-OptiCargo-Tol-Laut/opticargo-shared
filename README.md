@@ -1,94 +1,80 @@
-# OptiCargo Shared (`opticargo-shared`)
+# opticargo-shared
 
-**Versi:** 0.1.0
-**Tipe:** Python Package (Library)
-**Repositori:** `opticargo-ai/opticargo-shared`
+`opticargo-shared` v1.0.0 is the framework-independent contract package for
+OptiCargo AI. It contains Pydantic v2 models, canonical enums, domain event
+payloads, agent/ML state, API envelopes, dataset provenance, and versioned JSON
+Schema snapshots. It performs no I/O on import and contains no ORM or service
+dependencies.
 
-Selamat datang di `opticargo-shared`! Repositori ini berfungsi sebagai **sumber kebenaran tunggal (*Single Source of Truth*)** untuk seluruh skema data, *enum*, dan *state* AI pada platform OptiCargo AI. Paket ini dikonsumsi oleh tim Backend, Frontend, dan AI (`opticargo-gateway-api`, `opticargo-agents`, dll.) agar bentuk data konsisten di seluruh layanan.
+## Requirements and installation
 
----
+- Python 3.11+
+- `pydantic>=2,<3`
 
-## Struktur Direktori & Tugas Tiap Folder
-
-- **`src/opticargo_shared/models/`**
-  Berisi skema entitas inti (Pydantic). Setiap model di sini selaras 1:1 dengan struktur tabel *database* PostgreSQL. Tidak mengandung logika bisnis atau dependensi ke SQLAlchemy.
-  
-- **`src/opticargo_shared/agent_state/`**
-  Berisi model Pydantic yang mendefinisikan *state* untuk agen-agen AI (LangGraph) yang beroperasi di `opticargo-agents`.
-
-- **`src/opticargo_shared/api/`**
-  Berisi skema generik untuk respons API, seperti format paginasi dan pesan *error*. Membantu memastikan konsistensi *endpoint* di *gateway*.
-
-- **`src/opticargo_shared/enums.py`**
-  Mendefinisikan *enum* status dan tipe yang dipakai lintas layanan (misal: `ShipStatus`, `VoyageStatus`).
-
-- **`src/opticargo_shared/constants.py`**
-  Menyimpan nilai-nilai konstan (misalnya default ukuran halaman) agar tidak ada *magic numbers* yang di-hardcode.
-
-- **`tests/`**
-  Berisi file pengujian (`test_models.py`, `test_api_schemas.py`, `test_agent_state.py`) untuk memvalidasi kelayakan setiap skema menggunakan `pytest`.
-
----
-
-## Cara Menjalankan & Instalasi Lokal
-
-Sebagai pengembang, jika Anda ingin menggunakan atau mengembangkan repositori ini secara lokal, ikuti langkah berikut:
-
-### 1. Instalasi (Mode Editable)
-Pastikan Anda berada di direktori akar (`opticargo-shared`) yang memiliki file `pyproject.toml`, lalu jalankan:
 ```bash
-pip install -e .
-```
-Jika Anda berencana untuk berkontribusi dan menjalankan pengujian (testing) atau linting, instal beserta *tools* pengembangannya:
-```bash
-pip install -e ".[test,lint]"
+python -m pip install -e ".[dev]"
 ```
 
-### 2. Contoh Pemakaian
-Setelah terinstal, Anda dapat langsung mengimpornya dalam proyek Python Anda seperti ini:
+Consumers must pin an immutable release, for example:
+
+```text
+opticargo-shared==1.0.0
+```
+
+## Quick start
+
 ```python
-from opticargo_shared.models.ship import Ship
-from opticargo_shared.enums import ShipStatus
+from opticargo_shared.events import DomainEvent
+from opticargo_shared.models import BookingRead
+from opticargo_shared.agent_state import RecommendationOutput
 
-# Menggunakan model
-kapal = Ship(
-    id="b839bb04-f655-46b0-96b6-397c0f16e379",
-    name="KM Nusantara Jaya",
-    imo_number="IMO1234567",
-    ship_type="General Cargo",
-    gross_tonnage=5000,
-    deadweight_tonnage=7000,
-    cargo_capacity_m3=8500,
-    operator_id="a123bb04-f655-46b0-96b6-111111111111",
-    flag="Indonesia",
-    status=ShipStatus.active,
-    created_at="2026-07-24T12:00:00Z"
-)
-print(kapal.name)
+booking = BookingRead.model_validate(booking_payload)
+event = DomainEvent.model_validate(event_payload)
+recommendation = RecommendationOutput.model_validate(ai_payload)
 ```
 
-### 3. Menjalankan Pengujian (Testing)
-Pastikan paket sudah diinstal bersama `[test]`. Jalankan:
+All critical contracts reject unknown fields. Timestamps are timezone-aware,
+IDs are UUIDs, precise business numbers use `Decimal`, and wire field names use
+`snake_case`.
+
+## Public contract areas
+
+- `opticargo_shared.models`: 17 entity families, including `CargoCapacity`
+- `opticargo_shared.enums`: identity, operations, transaction, knowledge, AI/ML
+- `opticargo_shared.events`: versioned envelope and typed event payloads
+- `opticargo_shared.agent_state`: citations, candidates, scoring, optimization,
+  recommendation output, and orchestrator state
+- `opticargo_shared.ml`: scoring, forecast, anomaly, and model status contracts
+- `opticargo_shared.api`: error, page/cursor pagination, export, idempotency
+- `opticargo_shared.dataset`: dataset manifest and record provenance
+
+Legacy entity names such as `Booking` remain aliases of their `*Read` contract.
+New integrations should use explicit `*Create`, `*Update`, and `*Read` names.
+`UserInternal` is deliberately not exported from the package model namespace.
+
+## Quality and compatibility
+
 ```bash
-pytest tests/ -v
+ruff check .
+ruff format --check .
+mypy src/opticargo_shared
+pytest --cov=opticargo_shared --cov-fail-under=90
+python scripts/generate_schemas.py schemas/current
+python scripts/check_compatibility.py schemas/snapshots/v1.0.0 schemas/current
+python -m build
 ```
-Seluruh fungsi wajib memberikan hasil `PASSED` hijau sebelum kode dapat digabungkan (*merge*).
 
----
+Examples are available in [`examples/`](examples/). Current schemas live in
+[`schemas/current/`](schemas/current/) and the immutable v1 baseline in
+[`schemas/snapshots/v1.0.0/`](schemas/snapshots/v1.0.0/).
 
-## 4. Instalasi Lintas Repo
-Bagi tim konsumen (seperti tim Backend di `opticargo-gateway-api` atau tim AI di `opticargo-agents`), Anda tidak perlu mengkloning repositori ini. Cukup instal paket ini langsung dari GitHub menggunakan *tag* versi yang disepakati.
+## Versioning policy
 
-Jalankan perintah berikut di terminal proyek Anda:
-```bash
-pip install git+[https://github.com/opticargo-ai/opticargo-shared.git@v0.1.0](https://github.com/opticargo-ai/opticargo-shared.git@v0.1.0)
+- MAJOR: remove/rename fields, incompatible type or requiredness changes, enum
+  removal/change, event semantic change.
+- MINOR: additive optional fields, new models/helpers/event types.
+- PATCH: validator, documentation, or typing fixes that preserve the wire
+  contract.
 
----
-
-## Informasi Penting: Aturan Kontribusi & Perubahan
-
-### Semantic Versioning (Semver)
-Repositori ini sangat sensitif terhadap perubahan karena digunakan oleh seluruh tim. 
-- Jika Anda mengubah tipe data, menghapus, atau merename *field* yang sudah ada -> **Naikkan Versi MAJOR** (contoh: 0.1.0 menjadi 1.0.0). Ini disebut *Breaking Change*.
-- Jika Anda hanya menambahkan *field* opsional baru -> **Naikkan Versi MINOR** (contoh: 0.1.0 menjadi 0.2.0).
-- Pembaruan versi dilakukan dengan mengubah nilai `version` di dalam `pyproject.toml`.
+Every contract change requires tests, regenerated current schemas, a compatibility
+check, and a CHANGELOG entry. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
