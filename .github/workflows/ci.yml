@@ -1,0 +1,29 @@
+name: contract-quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy src/opticargo_shared
+      - run: pytest --cov=opticargo_shared --cov-fail-under=90
+      - run: python scripts/generate_schemas.py schemas/current
+      - run: git diff --exit-code -- schemas/current
+      - run: python scripts/check_compatibility.py schemas/snapshots/v1.0.0 schemas/current
+      - run: python -m build
+      - run: python -m pip install --force-reinstall dist/*.whl
+      - run: python -c "import opticargo_shared; print(opticargo_shared.__version__)"
