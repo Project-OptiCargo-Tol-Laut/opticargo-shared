@@ -58,7 +58,7 @@ New integrations should use explicit `*Create`, `*Update`, and `*Read` names.
 ruff check .
 ruff format --check .
 mypy src/opticargo_shared
-pytest --cov=opticargo_shared --cov-fail-under=90
+python -m pytest --cov=opticargo_shared --cov-fail-under=90
 python scripts/generate_schemas.py schemas/current
 python scripts/check_compatibility.py schemas/snapshots/v1.0.0 schemas/current
 python -m build
