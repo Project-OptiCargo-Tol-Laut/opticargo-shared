@@ -1,10 +1,16 @@
+from typing import Any
+
+from pydantic import Field
+
 from opticargo_shared.agent_state.base import BaseAgentState
 from opticargo_shared.models.recommendation import Recommendation
 
+
 class RecommendationAgentInput(BaseAgentState):
-    optimization_result: dict
+    optimization_result: dict[str, Any]
     retrieved_context: str | None = None
+
 
 class RecommendationAgentOutput(BaseAgentState):
     final_recommendation: Recommendation
-    draft_document_paths: list[str] = []
+    draft_document_paths: list[str] = Field(default_factory=list)

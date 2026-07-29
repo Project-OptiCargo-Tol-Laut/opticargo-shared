@@ -4,22 +4,64 @@ build-backend = "hatchling.build"
 
 [project]
 name = "opticargo-shared"
-version = "0.1.0"
+version = "1.0.0"
 description = "Single source of truth untuk skema data platform OptiCargo AI"
-requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
 dependencies = [
-    "pydantic>=2.0,<3.0",
-    "pydantic[email]>=2.0"
+    "pydantic[email]>=2.0,<3.0"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
 ]
 
+[project.urls]
+Repository = "https://github.com/opticargo-ai/opticargo-shared"
+
 [project.optional-dependencies]
-test = [
+dev = [
+    "build>=1.2",
+    "mypy>=1.10",
     "pytest>=7.0",
-    "pytest-cov>=4.0"
-]
-lint = [
-    "ruff"
+    "pytest-cov>=4.0",
+    "ruff>=0.5",
 ]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/opticargo_shared"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/schemas",
+    "/examples",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/opticargo_shared/models/__init__.py" = ["F401"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["opticargo_shared"]
+mypy_path = "src"

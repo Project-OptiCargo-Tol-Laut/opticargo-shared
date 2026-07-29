@@ -1,17 +1,22 @@
-from decimal import Decimal
 from uuid import UUID
-from pydantic import BaseModel
+
+from pydantic import Field
+
 from opticargo_shared.agent_state.base import BaseAgentState
+from opticargo_shared.base import ContractModel, DecimalScore, NonNegativeDecimal
+
 
 class GraphAnalysisInput(BaseAgentState):
     origin_port_id: UUID
-    search_radius_days: int = 7
+    search_radius_days: int = Field(default=7, ge=0)
 
-class BackhaulCandidate(BaseModel):
+
+class BackhaulCandidate(ContractModel):
     supplier_id: UUID
     commodity_id: UUID
-    volume_ton: Decimal
-    match_score: float
+    volume_ton: NonNegativeDecimal
+    match_score: DecimalScore
+
 
 class GraphAnalysisOutput(BaseAgentState):
-    candidates: list[BackhaulCandidate]
+    candidates: list[BackhaulCandidate] = Field(default_factory=list)
